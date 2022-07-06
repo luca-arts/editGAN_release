@@ -29,11 +29,15 @@ import argparse
 import copy
 from io import BytesIO
 from models.EditGAN.EditGAN_tool import Tool
+# to enable the use of GOOGLE COLAB
+from flask_ngrok import run_with_ngrok
 
 np.random.seed(6)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 app = Flask(__name__)
+run_with_ngrok(app)
+
 CORS(app, support_credentials=True)
 
 
@@ -401,4 +405,4 @@ def upload_vector():
 if __name__ == '__main__':
     args = get_args()
 
-    app.run(host='0.0.0.0', threaded=True, port=args.port)
+    app.run()#host='0.0.0.0', threaded=True, port=args.port)
